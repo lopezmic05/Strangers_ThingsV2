@@ -1,21 +1,29 @@
 export const Cohort = "2206-FTB-ET-WEB-FT";
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${Cohort}`;
 
-async function registerPerson(event) {
-  const registerUsername = event.target[0].value;
-  const registerPassword = event.target[1].value;
-  const response = await fetch(`${BASE_URL}/users/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user: {
-        username: registerUsername,
-        password: registerPassword,
+export const registerUser = async(username, password) => {
+  try {
+    console.log(`${BASE_URL}users/register`);
+    const response = await fetch(`${BASE_URL}/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    }),
-  });
+      body: JSON.stringify({
+        user: {
+          username: username,
+          password: password,
+        },
+      }),
+    });
+    const result = await response.json()
+    const token = result.token
+    localStorage.setItem("token", token)
+    return result
+    
+  } catch (error) {
+    throw error
+  }
 }
 
 export const getAllPosts = async () => {
