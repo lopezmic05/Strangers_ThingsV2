@@ -26,13 +26,52 @@ export const registerUser = async(username, password) => {
   }
 }
 
+export const loginUser = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          username: username,
+          password: password
+        }
+      })
+    })
+    const result = await response.json()
+    return result
+  } catch (error) {
+    throw error
+  }
+}
+
+
+
+export const getUser = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+      },
+    })
+  } catch (error) {
+    
+  }
+}
+
 export const getAllPosts = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/posts`);
+    const response = await fetch(`${BASE_URL}/posts`, {
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    });
     const result = await response.json();
-    if (result.error) throw result.error;
-    return result.data.players;
-  } catch (err) {
-    console.error("Uh oh, trouble fetching posts!", err);
+    return result;
+  } catch (error) {
+    console.error("Uh oh, trouble fetching posts!", error);
   }
 };
