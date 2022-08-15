@@ -1,55 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { getAllPosts } from "../api";
 
+import './posts.css'
+
 const Posts = () => {
-const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
-
-const getPostData = async () => {
-  try {
-    const result = await getAllPosts()
-    console.log(result)
-    if(result){
-      setPosts(result)
+  const getPostData = async () => {
+    try {
+      const result = await getAllPosts();
+      console.log(result);
+      if (result) {
+        setPosts(result);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error)
-  }
-}
+  };
 
+  useEffect(() => {
+    getPostData();
+  }, []);
 
-useEffect(() =>{
-  getPostData()
-},[])
-
-// const mapPosts = posts.map((post) => {
-//   return (
-//     <div>
-//       <h3>Name: {post.description}</h3>
-//       <h3>Goal: {post.price}</h3>
-//       <h3>Creator: {post.title}</h3>
-//       <br />
-//     </div>
-//   );
-// });
-
-
-// const mapPosts = posts.map((post) => {
-//   console.log(post)
-//   return(
-//     <div>
-//       <h3> post</h3>
-//     </div>
-//   )
-//   console.log(post)
-// })
   return (
-  <div>THIS IS POSTS
-  {/* {posts && posts.length ? <p>{mapPosts}</p> : null} */}
-  </div>
-  )
+    <div id="posts">
+      <h1>THIS IS POSTS</h1>
+      {posts.map((post) => (
+        <div id='post-list' key={post.id}>
+          <h3>{post.author.username}</h3>
+          <br />
+          <p>{post.title}</p>
+          <p>{post.description}</p>
+          <p>{post.price}</p>
+          <br />
+          {"------"}
+        </div>
+      ))}
+    </div>
+  );
 };
-
-
 
 export default Posts;

@@ -1,0 +1,48 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow', sans-serif;
+    letter-spacing: 2px;
+}
+
+#nav-header{
+    display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+    justify-content:space-between;
+    align-items: center;
+    background-color: darkgrey;
+    margin-bottom: 10px;
+    padding: 20px 20px;
+
+}
+
+#post-list{
+    margin: 20px 20px;
+    font-size: 20px;
+
+}
+
+#links{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    padding-right: 20px;
+    color: aliceblue;
+
+}
+#links a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+#links a:hover {
+    color: rgb(110, 108, 108);
+}
+
