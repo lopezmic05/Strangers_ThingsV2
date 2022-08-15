@@ -4,11 +4,13 @@ import { getUserInfo } from "../api";
 const Profile = (props) => {
   let token = "";
   const [myInfo, setMyInfo] = useState({});
+
+  
   useEffect(() => {
     token = localStorage.getItem("token");
     async function getMyInfo() {
       const myReturnInfo = await getUserInfo(token);
-      console.log(myReturnInfo, "returned info from apu call!");
+      console.log(myReturnInfo, "returned info from api call!");
       setMyInfo(myReturnInfo);
     }
     getMyInfo();

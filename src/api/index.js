@@ -102,3 +102,64 @@ export const createPosts = async (title, description, price, location) => {
   }
 }
 
+export const editPosts = async  (title, description, price, location, willDeliver, token, post_id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${post_id}`, {
+      method : 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        post: {
+          title: title,
+          description: description,
+          price: price,
+          location: location,
+          willDeliver: willDeliver
+        }
+      })
+    })
+    const result = await response.json()
+    return result
+  } catch (error) {
+    throw error
+  }
+}
+
+export const deletePosts = async (token, post_id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${post_id}`, {
+      method : 'DELETE',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    const result = await response.json()
+    return result
+  } catch (error) {
+    throw error
+  }
+}
+
+export const createMessage = async ( token, post_id, content) => {
+  try {
+    const response = await fetch( `${BASE_URL}/posts/${post_id}/messages`, {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+      },
+      body : JSON.stringify({
+        message: {
+          content : content
+        }
+      })
+    })
+    const result = await response.json()
+    return result
+  } catch (error) {
+    
+  }
+}
