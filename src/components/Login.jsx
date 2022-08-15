@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 import { loginUser } from "../api";
 
@@ -8,6 +8,7 @@ import './login.css'
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
 
   const handleOnChange = (event) => {
     const changed = event.target.id;
@@ -22,6 +23,7 @@ const Login = () => {
     event.preventDefault();
     const token = await loginUser(username, password);
     localStorage.setItem("token", token);
+    navigate("/Profile");
   }
   return (
     <div className='login-box'>
