@@ -27,11 +27,16 @@ const Posts = () => {
       <h1>THIS IS POSTS</h1>
       {posts.map((post) => (
         <div id='post-list' key={post.id}>
-          <h3>{post.author.username}</h3>
           <br />
-          <p>{post.title}</p>
-          <p>{post.description}</p>
-          <p>{post.price}</p>
+          <h4>{post.title}</h4>
+          <p>Description: {post.description}</p>
+          <p>User: {post.author.username}</p>
+          <p>Price: {post.price}</p>
+          <p>Location:{post.location}</p>
+          { post.willDeliver ?
+          <p className='descriptions'>delivery: Yes</p>
+            :null
+          }
           <br />
           {"------"}
         </div>

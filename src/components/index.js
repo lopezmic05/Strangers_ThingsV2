@@ -1,4 +1,6 @@
 export { default as Main } from "./Main"
+export { default as CreatePosts } from "./CreatePosts"
+export { default as CreateMessage } from "./CreateMessage"
 export { default as Home } from "./Home"
 export { default as Login} from "./Login"
 export { default as NavBar } from "./NavBar"

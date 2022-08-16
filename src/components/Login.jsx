@@ -5,7 +5,7 @@ import { loginUser } from "../api";
 
 import './login.css'
 
-const Login = () => {
+const Login = ({setIsLoggedIn}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
@@ -22,7 +22,10 @@ const Login = () => {
   async function handleSubmit(event) {
     event.preventDefault();
     const token = await loginUser(username, password);
+    token ? setIsLoggedIn(true) : false
+    localStorage.setItem('username', username)
     localStorage.setItem("token", token);
+    setUsername(username)
     navigate("/Profile");
   }
   return (

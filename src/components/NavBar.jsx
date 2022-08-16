@@ -1,27 +1,44 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import {  NavLink, useNavigate } from "react-router-dom";
 // import "./navbar.css";
 
-const NavBar = () => {
+const NavBar = ({ isLoggedIn, setIsLoggedIn, setUsername, setPassword}) => {
+  let navigate = useNavigate()
+
+
+  const logout = () => {
+    localStorage.removeItem('username')
+    localStorage.removeItem('token')
+    setIsLoggedIn(false)
+    navigate('/')
+    setUsername('')
+    setPassword('')
+  }
   return (
     <div id='nav-header'>
       <h1 id='title'>Stranger's Things</h1>
-      <div id="links">
-        <Link to='/' id='home'>
-          Home
-        </Link>
-        <Link to='/profile' id='register'>
-          Profile
-        </Link>
-        <Link to='/posts' id='post'>
+      {isLoggedIn ? (
+        <div>
+        <NavLink to='/posts' id='post'>
           Posts
-        </Link>
-        <Link to='/login' id='login'>
+        </NavLink>
+        
+        <NavLink to='/profile' id='profile'>
+          Profile
+        </NavLink>
+        <button id="logout" onClick={logout}> Logout</button>
+        </div>
+      ): (
+        <div>
+        <NavLink to='/login' id='login'>
           Login
-        </Link>
-        <Link to='/register' id='register'>
+        </NavLink>
+        </div>
+      )}
+      <div id="links">
+        <NavLink to='/register' id='register'>
           Register
-        </Link>
+        </NavLink>
       </div>
     </div>
   );
